@@ -1,0 +1,110 @@
+1、facebook----虚拟dom  createElement()  render()
+2、新建react项目：create-react-app week2
+3、npm run eject 结构出隐藏的文件来----config文件夹---webpackDevServer.config.js可以配接口
+
+4、react-router-dom：BrowserRouter、HashRouter（路由根组件，只能出现一次）、Route（配路由）、NavLink（a标签）、Switch（只要匹配上，后边不执行）、Link（没有默认active）、Redirect；
+  属性：exact 完全匹配
+
+5、redux   独立存在：
+一、创建仓库：import {createStore} from 'redux'
+定义reducer：
+   let reducer=(state={count:0},action)=>{
+	let newState={...state}
+	switch(action.type){
+	case 'ADD': newState.count++
+                	return newState
+	default: return newState   不能省
+	}
+	
+}
+
+     let store= createStore(reducer)    reducer是一个函数,必须有返回值
+      window.store=store
+      export default store
+
+
+二、使用仓库：
+获取数据：store.getState()
+触发action：store.dispatch({type:'ADD',参数})
+监听函数：store.subscribe(()=>{this.setState({})})  ,这个函数在constructor里面写
+
+1、setState函数
+ Object.assign() 而且还是异步函数
+  this.setState({},()=>{})
+
+
+6、react-redux  让组件里使用redux
+ <Provider store={store}>...</Provider>
+connect(mapstatetoprops,,mapdispatchtoprops)(组件名)
+6、封装路由  （路由数组、switch组件）
+7、路由懒加载---react-loadable
+8、路由拦截---高阶组件
+9、什么是高阶组件？是一个函数，参数是组件，返回值是新组件
+10、jsx语法
+        {...js语句}
+       <标签>
+11、组件  函数式组件   类组件
+（1）函数式组件也叫作无状态组件，没有生命周期，纯展示没有逻辑
+function Dialog(props){
+return dom结构
+}
+（2）类组件 class   有状态  有生命周期  有逻辑
+  class Dialog extends React.Component{
+      constructor(props){     只执行一次
+	super(props)
+           1、定义state
+          2、监听store
+         3、给自定义的方法bind(this)
+      }
+       componentWillMount(){}         只执行一次
+       render(){
+return  DOM结构}
+       componentDidMount(){ 调接口}	只执行一次	
+
+ }
+实例期--存在期update（state改变、props改变）--销毁期 componentWillUnMount就一个
+
+在更新的时候有一个优化：shouldComponentUpdate(nextprops,nextstate){   return true/false  }
+react中提供一个pureComponent
+标签优化<>...</>空标记,Fragment
+
+=====事件=======
+
+react 事件:都是合成事件、所有的事件都是绑定给了document
+
+ <button       onClick={()=>{自动就会有this}}></button>
+
+<button       onClick={()=>{this.demo(id)}}></button>
+<button       onClickCapture={()=>{this.demo(id)}}></button>
+<button  @click.capture="">
+
+举例：
+定义react方法 : demo=(e,id)=>{...}      
+
+===========组件传值============
+
+父传子   <Son title='你好'><span>fsdfs</span></Son>----接收this.props.title
+子传父   给子组件传方法    <Son addFn={this.addFn}></Son>-----子组件  this.props.addFn(参数)
+
+上下文对象context  {Provider，Consumer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
